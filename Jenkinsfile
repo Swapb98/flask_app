@@ -1,9 +1,5 @@
 pipeline {
     agent any
-    
-    tools {
-        sonarRunner 'SonarScanner'
-    }
 
     stages {
         stage('Clone Repository') {
@@ -24,6 +20,7 @@ pipeline {
                     sh '''
                     sonar-scanner \
                     -Dsonar.projectKey=demo-project \
+                    -Dsonar.host.url=192.168.29.225:9000 \
                     -Dsonar.sources=.
                     '''
                 }
