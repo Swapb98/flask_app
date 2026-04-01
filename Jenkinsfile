@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Clone Repository') {
             steps {
-                git 'https://github.com/Swapb98/flask_app.git'
+                git branch: 'main', url: 'https://github.com/Swapb98/flask_app.git'
             }
         }
         
