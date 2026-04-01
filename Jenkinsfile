@@ -16,7 +16,7 @@ pipeline {
         
         stage('SonarQube Scan') {
             steps {
-                withSonarQubeEnv('sonar-server') {
+                withSonarQubeEnv('SonarQube') {
                     sh '''
                     docker run --rm \
                         -e SONAR_HOST_URL=http://http://192.168.29.225/:9000 \
