@@ -2,13 +2,13 @@ pipeline {
     agent any
     
     tools {
-        sonarQubeScanner 'SonarScanner'
+        sonarRunner 'SonarScanner'
     }
 
     stages {
         stage('Clone Repository') {
             steps {
-                git 'https://github.com/your-username/your-repo.git'
+                git 'https://github.com/Swapb98/flask_app.git'
             }
         }
         
@@ -20,13 +20,11 @@ pipeline {
         
         stage('SonarQube Scan') {
             steps {
-                withSonarQubeEnv('SonarQube') {
+                withSonarQubeEnv('sonar-server') {
                     sh '''
                     sonar-scanner \
                     -Dsonar.projectKey=demo-project \
-                    -Dsonar.sources=. \
-                    -Dsonar.host.url=http://localhost:9000 \
-                    -Dsonar.login=$SONAR_AUTH_TOKEN
+                    -Dsonar.sources=.
                     '''
                 }
             }
