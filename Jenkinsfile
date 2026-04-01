@@ -16,12 +16,14 @@ pipeline {
         
         stage('SonarQube Scan') {
             steps {
-                withSonarQubeEnv('SonarQube') {
+                withSonarQubeEnv('sonar-server') {
                     sh '''
-                    sonar-scanner \
-                    -Dsonar.projectKey=demo-project \
-                    -Dsonar.host.url=192.168.29.225:9000 \
-                    -Dsonar.sources=.
+                    docker run --rm \
+                        -e SONAR_HOST_URL=http://http://192.168.29.225/:9000 \
+                        -v $(pwd):/usr/src \
+                        sonarsource/sonar-scanner-cli \
+                        -Dsonar.projectKey=demo-project \
+                        -Dsonar.sources=.
                     '''
                 }
             }
